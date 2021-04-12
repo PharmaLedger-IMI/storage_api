@@ -25,7 +25,7 @@ services:
     command: yarn start
     container_name: storage-backend
     volumes:
-      - ./backend:/app/
+      - $PWD/backend:/app/
       - /app/node_modules
     ports:
       - 1337:1337
