@@ -1,0 +1,19 @@
+{
+  "name": "storage-api",
+  "version": "1.0.0",
+  "description": "Storage APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "parse-server"
+  ],
+  "author": "Technovative Solutions LTD",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "express": "^4.17.1",
+    "parse-server": "^4.5.0"
+  }
+}

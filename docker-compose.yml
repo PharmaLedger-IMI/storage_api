@@ -1,0 +1,45 @@
+version: "2"
+services:
+  redis:
+    image: redis:alpine
+    container_name: storage-redis
+    ports:
+      - 6380:6379
+    volumes:
+      - $PWD/data/redis:/var/lib/redis
+      - $PWD/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    env_file:
+      - $PWD/redis/.env
+  mongodb:
+    image: mongo:latest
+    container_name: storage-mongodb
+    volumes:
+      - $PWD/data/mongodb/:/data/db/
+      - $PWD/data/log/mongodb/:/var/log/mongodb/
+    environment:
+      MONGO_INITDB_DATABASE: storage-db
+    ports:
+      - 27018:27017
+  backend:
+    build: ./backend
+    command: yarn start
+    container_name: storage-backend
+    volumes:
+      - ./backend:/app/
+      - /app/node_modules
+    ports:
+      - 1337:1337
+    depends_on:
+      - mongodb
+      - redis
+    env_file:
+      - $PWD/backend/.env
+  backend-dashboard:
+    image: yongjhih/parse-dashboard
+    container_name: storage-backend-dashboard
+    env_file:
+      - $PWD/backend/.dashboard.env
+    ports:
+      - 4040:4040
+    depends_on:
+      - backend
