@@ -43,3 +43,13 @@ services:
       - 4040:4040
     depends_on:
       - backend
+  doc:
+    image: slatedocs/slate:latest
+    command: serve
+    container_name: storage-doc
+    volumes:
+      - $PWD/doc/images/logo.png:/srv/slate/source/images/logo.png
+      - $PWD/doc/index.html.md:/srv/slate/source/index.html.md
+      - $PWD/doc/includes:/srv/slate/source/includes
+    ports:
+      - 4567:4567
