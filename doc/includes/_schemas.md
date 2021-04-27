@@ -1,300 +1,425 @@
 # Schema Store APIs
 
-## Get Query schemas
+## Fetch All Schemas
 
-```ruby
-require 'kittn'
+> Fetch all schema request example
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.schemas.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.schemas.get()
-```
+To fetch the Schema for all the classes of your app, run:
 
 ```shell
-curl --location --request GET 'http://localhost:3000/storage/classes/Product' \
---header 'X-Storage-Application-Id: 8bbf1067-fc29-4272-98e1-79a94e996dd5' \
---header 'X-Storage-Master-Key: 2861a9d0-0bcd-453b-aa73-ce10fe4f7e4f' \
+curl --location --request GET 'http://localhost:1337/storage/schemas' \
+--header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
+--header 'X-Storage-Master-Key: 3f1b38eb-c7f5-4315-93d3-575cd41e3919' \
 --header 'Content-Type: application/json'
 ```
 
 ```javascript
-const kittn = require('kittn');
+var axios = require('axios');
 
-let api = kittn.authorize('meowmeowmeow');
-let schemas = api.schemas.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+var config = {
+  method: 'get',
+  url: 'http://localhost:1337/storage/schemas',
+  headers: {
+    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+    'X-Storage-Master-Key': '3f1b38eb-c7f5-4315-93d3-575cd41e3919',
+    'Content-Type': 'application/json'
   }
-]
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 ```
 
-This endpoint retrieves all schemas.
+This endpoint fetch all schemas.
 
 ### HTTP Request
 
-`GET http://localhost:3000/storage/classes/<className>`
+`GET http://<API_HOST>/storage/schemas`
 
 ### Query Parameters
 
-Parameter | Description
---------- | -----------
-ClassName | The ClassName of the Schema to retrieves
+Parameter | Default | Description
+--------- | ------- | -----------
 
-<aside class="success">
-Remember — a happy Schema is an authenticated Schema!
-</aside>
+### Response
 
-## Create a Schema
+<code>
+https://&lt;API_HOST&gt;/storage/schemas
+</code>
 
-```ruby
-require 'kittn'
+The response body is JSON containing all the schema information of the app.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.schemas.get(2)
-```
+<code>
+{<br>
+&nbsp;&nbsp;"results": [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"className": "Product",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fields": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"objectId": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"createdAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"updatedAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ACL": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "ACL"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"price": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Number"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"weight": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;]<br>
+}<br>
+</code>
 
-```python
-import kittn
+## Adding a schema
 
-api = kittn.authorize('meowmeowmeow')
-api.schemas.get(2)
-```
+> Adding a schema request example
+
+When you add a new schema to your app, it creates an empty class with the provided fields and some default fields applicable to the class. To add the schema, run:
 
 ```shell
-curl --location --request POST 'http://localhost:3000/storage/classes/Product' \
---header 'X-Storage-Application-Id: 8bbf1067-fc29-4272-98e1-79a94e996dd5' \
---header 'X-Storage-Master-Key: 2861a9d0-0bcd-453b-aa73-ce10fe4f7e4f' \
+curl --location --request POST 'http://localhost:1337/storage/schemas' \
+--header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
+--header 'X-Storage-Master-Key: 3f1b38eb-c7f5-4315-93d3-575cd41e3919' \
 --header 'Content-Type: application/json' \
---data-raw ‘{
-  "name": "Product 2",
-  "price": 10,
-  "weight": "286 g"
-}
+--data-raw '{
+  "className": "Product",
+   "fields": {
+     "name": {
+       "type": "String"
+     }
+   }
+ }'
 ```
 
 ```javascript
-const kittn = require('kittn');
+var axios = require('axios');
+var data = JSON.stringify({"className":"Product","fields":{"name":{"type":"String"}}});
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.schemas.get(2);
+var config = {
+  method: 'post',
+  url: 'http://localhost:1337/storage/schemas',
+  headers: {
+    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+    'X-Storage-Master-Key': '3f1b38eb-c7f5-4315-93d3-575cd41e3919',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint create a Schema.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint adding a schema.
 
 ### HTTP Request
 
-`POST http://localhost:3000/storage/classes/<className>`
+`POST http://<API_HOST>/storage/schemas`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ClassName | The ClassName of the Schema to create
+Parameter | Default | Description
+--------- | ------- | -----------
 
-## Get a Specific Schema
+### Response
+You may also add indexes to your fields. You need to use the format you need to use `{"index_name" : { field_name: index } }`. The fields must exist when you add indexes.
+<code>
+https://&lt;API_HOST&gt;/storage/schemas
+</code>
 
-```ruby
-require 'kittn'
+The response body is JSON containing all the schema information of the app.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.schemas.get(2)
-```
+<code>
+{<br>
+&nbsp;&nbsp;"className": "Product",<br>
+&nbsp;&nbsp;"fields": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"objectId": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"createdAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"updatedAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"ACL": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "ACL"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"name": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"price": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Number"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"weight": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+</code>
 
-```python
-import kittn
+## Fetch the schema
 
-api = kittn.authorize('meowmeowmeow')
-api.schemas.get(2)
-```
+> Fetch the schema request example
+
+To fetch the Schema for all the classes of your app, run:
 
 ```shell
-curl --location --request GET 'http://localhost:3000/storage/classes/Product/2' \
---header 'X-Storage-Application-Id: 8bbf1067-fc29-4272-98e1-79a94e996dd5' \
---header 'X-Storage-Master-Key: 2861a9d0-0bcd-453b-aa73-ce10fe4f7e4f' \
+curl --location --request GET 'http://localhost:1337/storage/schemas/Product' \
+--header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
+--header 'X-Storage-Master-Key: 3f1b38eb-c7f5-4315-93d3-575cd41e3919' \
 --header 'Content-Type: application/json'
 ```
 
 ```javascript
-const kittn = require('kittn');
+var axios = require('axios');
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.schemas.get(2);
+var config = {
+  method: 'get',
+  url: 'http://localhost:1337/storage/schemas/Product',
+  headers: {
+    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+    'X-Storage-Master-Key': '3f1b38eb-c7f5-4315-93d3-575cd41e3919',
+    'Content-Type': 'application/json'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific Schema.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint fetch the schema.
 
 ### HTTP Request
 
-`GET http://localhost:3000/storage/classes/<className>/<SchemaId>/2`
+`GET http://<API_HOST>/storage/schemas/<className>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ClassName | The ClassName of the Schema to retrieve
-ID | The ID of the Schema to retrieve
+Parameter | Default | Description
+--------- | ------- | -----------
+className |      | Class name of the object. We recommend that you `NameYourClassesLikeThis`
 
-## Update a Schema
+### Response
 
-```ruby
-require 'kittn'
+<code>
+https://&lt;API_HOST&gt;/storage/schemas/Product
+</code>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.schemas.get(2)
-```
+The response body is JSON containing all the schema information of the app.
 
-```python
-import kittn
+<code>
+{<br>
+&nbsp;&nbsp;"className": "Product",<br>
+&nbsp;&nbsp;"fields": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"objectId": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"createdAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"updatedAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"ACL": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "ACL"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"name": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"price": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Number"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"weight": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+</code>
 
-api = kittn.authorize('meowmeowmeow')
-api.schemas.get(2)
-```
+## Modifying the schema
+
+> Modifying the schema request example
+
+You can add or delete columns to a schema. To do so, run:
+To delete a particular field or index, you need to use `{"__op" : "Delete" }`
 
 ```shell
-curl --location --request PUT 'http://localhost:3000/storage/classes/Product/2' \
---header 'X-Storage-Application-Id: 8bbf1067-fc29-4272-98e1-79a94e996dd5' \
---header 'X-Storage-Master-Key: 2861a9d0-0bcd-453b-aa73-ce10fe4f7e4f' \
+curl --location --request PUT 'http://localhost:1337/storage/schemas/Product' \
+--header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
+--header 'X-Storage-Master-Key: 3f1b38eb-c7f5-4315-93d3-575cd41e3919' \
 --header 'Content-Type: application/json' \
---data-raw ‘{
-  "name": "Product 2",
-  "price": 10,
-  "weight": "286 g"
-}
+--data-raw '{
+  "className": "Product",
+   "fields": {
+     "price": {
+       "type": "Number"
+     }
+   }
+ }'
 ```
 
 ```javascript
-const kittn = require('kittn');
+var axios = require('axios');
+var data = JSON.stringify({"className":"Product","fields":{"price":{"type":"Number"}}});
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.schemas.get(2);
+var config = {
+  method: 'put',
+  url: 'http://localhost:1337/storage/schemas/Product',
+  headers: {
+    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+    'X-Storage-Master-Key': '3f1b38eb-c7f5-4315-93d3-575cd41e3919',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint update a Schema.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint Modifying the Schema.
 
 ### HTTP Request
 
-`PUT http://localhost:3000/storage/classes/<className>/<SchemaId>`
+`PUT http://<API_HOST>/storage/schemas/<className>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ClassName | The ClassName of the Schema to update
-SchemaId | The SchemaId of the Schema to update
+Parameter | Default | Description
+--------- | ------- | -----------
+className |      | Class name of the object. We recommend that you `NameYourClassesLikeThis`
 
-## Delete a Specific Schema
+### Response
 
-```ruby
-require 'kittn'
+<code>
+https://&lt;API_HOST&gt;/storage/schemas/Product
+</code>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.schemas.delete(2)
-```
+The response body is JSON containing all the schema information of the app.
 
-```python
-import kittn
+<code>
+{<br>
+&nbsp;&nbsp;"className": "Product",<br>
+&nbsp;&nbsp;"fields": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"objectId": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"createdAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"updatedAt": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Date"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"ACL": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "ACL"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"name": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"price": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "Number"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"weight": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "String"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+</code>
 
-api = kittn.authorize('meowmeowmeow')
-api.schemas.delete(2)
-```
+## Removing a Schema
+
+> Removing a Schema request example
+
+You can only remove a schema from your app if it is empty (has 0 objects). To do that, run:
 
 ```shell
-curl --location --request DELETE 'http://localhost:3000/storage/classes/Product/2' \
---header 'X-Storage-Application-Id: 8bbf1067-fc29-4272-98e1-79a94e996dd5' \
---header 'X-Storage-Master-Key: 2861a9d0-0bcd-453b-aa73-ce10fe4f7e4f' \
---header 'Content-Type: application/json'
+curl --location --request DELETE 'http://localhost:1337/storage/schemas/Product' \
+--header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
+--header 'X-Storage-Master-Key: 3f1b38eb-c7f5-4315-93d3-575cd41e3919' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 ```
 
 ```javascript
-const kittn = require('kittn');
+var axios = require('axios');
+var data = '';
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.schemas.delete(2);
+var config = {
+  method: 'delete',
+  url: 'http://localhost:1337/storage/schemas/Product',
+  headers: {
+    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
+    'X-Storage-Master-Key': '3f1b38eb-c7f5-4315-93d3-575cd41e3919',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific Schema.
+This endpoint removing a Schema.
 
 ### HTTP Request
 
-`DELETE http://localhost:3000/storage/classes/<className>/<SchemaId>`
+`DELETE http://localhost:3000/storage/schemas/<className>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ClassName | The ClassName of the Schema to delete
-SchemaId | The SchemaId of the Schema to delete
+Parameter | Default | Description
+--------- | ------- | -----------
+className |      | Class name of the object. We recommend that you `NameYourClassesLikeThis`
+
+### Response
+
+<code>
+https://&lt;API_HOST&gt;/storage/schemas/Product
+</code>
+
+The response body is a JSON object containing just an `{}` empty object.
+
+<code>
+{}
+</code>
