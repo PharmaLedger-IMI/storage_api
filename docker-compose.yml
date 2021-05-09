@@ -20,12 +20,12 @@ services:
       MONGO_INITDB_DATABASE: storage-db
     ports:
       - 27018:27017
-  backend:
-    build: ./backend
+  api:
+    build: ./api
     command: yarn start
-    container_name: storage-backend
+    container_name: storage-api
     volumes:
-      - $PWD/backend:/app/
+      - $PWD/api:/app/
       - /app/node_modules
     ports:
       - 1337:1337
@@ -33,23 +33,24 @@ services:
       - mongodb
       - redis
     env_file:
-      - $PWD/backend/.env
-  backend-dashboard:
+      - $PWD/api/.env
+  dashboard:
     image: yongjhih/parse-dashboard
-    container_name: storage-backend-dashboard
+    container_name: storage-dashboard
     env_file:
-      - $PWD/backend/.dashboard.env
+      - $PWD/api/.dashboard.env
     ports:
       - 4040:4040
     depends_on:
-      - backend
-  doc:
+      - api
+  api-doc:
     image: slatedocs/slate:latest
     command: serve
-    container_name: storage-doc
+    container_name: storage-api-doc
     volumes:
-      - $PWD/doc/images/logo.png:/srv/slate/source/images/logo.png
-      - $PWD/doc/index.html.md:/srv/slate/source/index.html.md
-      - $PWD/doc/includes:/srv/slate/source/includes
+      - $PWD/api-doc/images/logo.png:/srv/slate/source/images/logo.png
+      - $PWD/api-doc/index.html.md:/srv/slate/source/index.html.md
+      - $PWD/api-doc/includes:/srv/slate/source/includes
+      - $PWD/api-doc/build:/srv/slate/build
     ports:
       - 4567:4567

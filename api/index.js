@@ -15,7 +15,7 @@ let express = require('express')
     , parseServer = new ParseServer(parseServerConfig)
     , app = express();
 
-app.all('/storage/*', function (req, res, next) {
+app.all('/v1/storage/*', function (req, res, next) {
   if(req.headers['x-storage-application-id']) {
     req.headers['x-parse-application-id'] = req.headers['x-storage-application-id'];
   }
@@ -28,7 +28,7 @@ app.all('/storage/*', function (req, res, next) {
   next();
 });
 
-app.use('/storage', parseServer.app);
+app.use('/v1/storage', parseServer.app);
 
 // Start the server
 app.listen(1337, function() {

@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Storage API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -9,7 +9,12 @@ toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - objects
+  - objects/main
+  - objects/create
+  - objects/retrieve
+  - objects/update
+  - objects/batch
+  - objects/data_types
   - schemas
   - files
   - errors
