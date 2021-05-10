@@ -11,8 +11,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - name: "1337"
-      port: 1337
+    - protocol: TCP
+      port: 80
       targetPort: 1337
   selector:
     io.kompose.service: storage-api
