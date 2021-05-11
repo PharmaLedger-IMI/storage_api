@@ -13,6 +13,231 @@ So far we have only used values that can be encoded with standard JSON. The Stor
 * Relation to another Class
 * Null
 
+### Counter
+To help with storing counter-type data, Storage API provides the ability to atomically increment (or decrement) any number field. To increment the counter, use the `Increment` operator with a positive number. To decrement the counter, use the `Increment` operator with a negative number. Examples are given in the dark area to the right.
+
+
+> Increment counter-type fields of a Object
+
+```shell
+curl --location --request PUT 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "totalSell": {
+        "__op": "Increment",
+        "amount": 1
+    }
+}'
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({"totalSell":{"__op":"Increment","amount":1}});
+
+var config = {
+  method: 'put',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne',
+  headers: {
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+> Decrement counter-type fields of a Object
+
+```shell
+curl --location --request PUT 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "totalSell": {
+        "__op": "Increment",
+        "amount": -1
+    }
+}'
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({"totalSell":{"__op":"Increment","amount":-1}});
+
+var config = {
+  method: 'put',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne',
+  headers: {
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Arrays
+To help with storing array data, there are three operations that can be used to atomically change an array field:
+
+*   `Add` appends the given array of objects to the end of an array field.
+*   `AddUnique` adds only the given objects which aren't already contained in an array field to that field. The position of the insert is not guaranteed.
+*   `Remove` removes all instances of each given object from an array field.
+
+Each method takes an array of objects to add or remove in the "objects" key. An example is given in the dark area to the right, where we can added items to the set-like "tags" field.
+
+```shell
+curl --location --request PUT 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "tags": {
+        "__op": "AddUnique",
+        "objects": [
+            "lorem",
+            "ipsum"
+        ]
+    }
+}'
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({"tags":{"__op":"AddUnique","objects":["lorem","ipsum"]}});
+
+var config = {
+  method: 'put',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne',
+  headers: {
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Relations
+
+In order to update Relation types, Storage API provides special operators to atomically add and remove objects to a relation. So, we can add an object to a relation like so:
+
+> Add an object to a relation type field of an object
+
+```shell
+curl --location --request PUT 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "categories": {
+        "__op": "AddRelation",
+        "objects": [
+            {
+                "__type": "Pointer",
+                "className": "Category",
+                "objectId": "cQBAnh0DsW"
+            }
+        ]
+    }
+}'
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({"categories":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Category","objectId":"cQBAnh0DsW"}]}});
+
+var config = {
+  method: 'put',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne',
+  headers: {
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+> Remove an object from a relation type field of an object
+
+```shell
+curl --location --request PUT 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "categories": {
+        "__op": "RemoveRelation",
+        "objects": [
+            {
+                "__type": "Pointer",
+                "className": "Category",
+                "objectId": "cQBAnh0DsW"
+            }
+        ]
+    }
+}'
+```
+
+```javascript
+var axios = require('axios');
+var data = JSON.stringify({"categories":{"__op":"RemoveRelation","objects":[{"__type":"Pointer","className":"Category","objectId":"cQBAnh0DsW"}]}});
+
+var config = {
+  method: 'put',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/NQzpuAxjne',
+  headers: {
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
 ### Date
 
 The `Date` type contains a field `iso` which contains a UTC timestamp stored in ISO 8601 format with millisecond precision: `YYYY-MM-DDTHH:MM:SS.MMMZ`. An example is given in the dark area to the right.
@@ -20,9 +245,9 @@ The `Date` type contains a field `iso` which contains a UTC timestamp stored in 
 > Creating an object which contains Date type field
 
 ```shell
-curl --location --request POST 'http://localhost:1337/storage/classes/Product' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request POST 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "Product 1",
@@ -39,10 +264,10 @@ var data = JSON.stringify({"name":"Product 1","availableFrom":{"__type":"Date","
 
 var config = {
   method: 'post',
-  url: 'http://localhost:1337/storage/classes/Product',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   },
   data : data
@@ -57,14 +282,14 @@ axios(config)
 });
 ```
 
-Dates are useful in combination with the built-in `createdAt` and `updatedAt` fields. For example, to retrieve objects availableFrom since a particular time, just encode a Date in a comparison query:
+Dates are useful in combination with the built-in `createdAt` and `updatedAt` fields. . An example is given in the dark area to the right, to retrieve objects availableFrom since a particular time, just encode a Date in a comparison query.
 
 > Querying objects which contains Date type field
 
 ```shell
-curl --location -g --request GET 'http://localhost:1337/storage/classes/Product?where={%22availableFrom%22:{%22$gte%22:{%22__type%22:%22Date%22,%22iso%22:%222011-08-21T18:02:52.249Z%22}}}' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location -g --request GET 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product?where={%22availableFrom%22:{%22$gte%22:{%22__type%22:%22Date%22,%22iso%22:%222011-08-21T18:02:52.249Z%22}}}' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json'
 ```
 
@@ -73,10 +298,10 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'http://localhost:1337/storage/classes/Product?where={"availableFrom":{"$gte":{"__type":"Date","iso":"2011-08-21T18:02:52.249Z"}}}',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product?where={"availableFrom":{"$gte":{"__type":"Date","iso":"2011-08-21T18:02:52.249Z"}}}',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   }
 };
@@ -92,40 +317,12 @@ axios(config)
 
 ### Pointer
 
-The `Pointer` type is used when mobile code sets another Parse `Object` as the value of another object. It contains the `className` and `objectId` of the referred-to value.
-
-```json
-{
-  "__type": "Pointer",
-  "className": "Category",
-  "objectId": "Ed1nuqPvc"
-}
-```
-
-Note that the built-in `User`, `Role`, and `Installation` classes are prefixed by an underscore. For example, pointers to user objects have a `className` of `_User`. Prefixing with an underscore is forbidden for developer-defined classes as it signifies the class is a special built-in.
+TODO
 
 ### File
 
-We do not recommend storing large pieces of binary data like images or documents on a Parse object. To store more, we recommend you use `File`. You may associate a [previously uploaded file](#files) using the `File` type.
-
-```json
-{
-  "__type": "File",
-  "name": "...profile.png"
-}
-```
+TODO
 
 ### Relation
 
-The `Relation` type is used for many-to-many relations. It has a `className` that is the class name of the target objects.
-
-```json
-{
-  "__type": "Relation",
-  "className": "GameScore"
-}
-```
-
-When querying, `Relation` objects behave like arrays of Pointers. Any operation that is valid for arrays of pointers (other than `include`) works for `Relation` objects.
-
-When more data types are added, they will also be represented as hashes with a `__type` field set, so you may not use this field yourself on JSON objects. For more information about how Parse handles data, check out our documentation on [Data](#data).
+TODO

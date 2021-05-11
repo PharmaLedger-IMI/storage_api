@@ -3,15 +3,15 @@
 > Creating objects in batch
 
 ```shell
-curl --location --request POST 'http://localhost:1337/storage/batch' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request POST 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json' \
 --data-raw '{
         "requests": [
           {
             "method": "POST",
-            "path": "/storage/classes/Product",
+            "path": "/v1/storage/classes/Product",
             "body": {
               "name": "Product 1",
               "price": 30.0
@@ -19,7 +19,7 @@ curl --location --request POST 'http://localhost:1337/storage/batch' \
           },
           {
             "method": "POST",
-            "path": "/storage/classes/Product",
+            "path": "/v1/storage/classes/Product",
             "body": {
               "name": "Product 2",
               "price": 40.0
@@ -31,14 +31,14 @@ curl --location --request POST 'http://localhost:1337/storage/batch' \
 
 ```javascript
 var axios = require('axios');
-var data = JSON.stringify({"requests":[{"method":"POST","path":"/storage/classes/Product","body":{"name":"Product 2","price":30}},{"method":"POST","path":"/storage/classes/Product","body":{"name":"Product 3","price":40}}]});
+var data = JSON.stringify({"requests":[{"method":"POST","path":"/v1/storage/classes/Product","body":{"name":"Product 2","price":30}},{"method":"POST","path":"/v1/storage/classes/Product","body":{"name":"Product 3","price":40}}]});
 
 var config = {
   method: 'post',
-  url: 'http://localhost:1337/storage/batch',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   },
   data : data
@@ -60,7 +60,7 @@ This endpoint runs batch requests.
 
 ### HTTP Request
 
-`POST http://<API_HOST>/storage/batch`
+`POST http://<API_HOST>/v1/storage/batch`
 
 ### Response
 The response from batch will be a list with the same number of elements as the input list. Each item in the list with be a dictionary with either the `success` or `error` field set. The value of `success` will be the normal response to the equivalent REST command as shown below:
@@ -106,9 +106,9 @@ Other commands that work in a batch are `update` and `delete`. Note that N reque
 > Updating objects in batch
 
 ```shell
-curl --location --request POST 'http://localhost:1337/storage/batch' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request POST 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "requests": [
@@ -138,10 +138,10 @@ var data = JSON.stringify({"requests":[{"method":"PUT","path":"/storage/classes/
 
 var config = {
   method: 'post',
-  url: 'http://localhost:1337/storage/batch',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   },
   data : data
@@ -160,9 +160,9 @@ axios(config)
 > Deleting objects in batch
 
 ```shell
-curl --location --request POST 'http://localhost:1337/storage/batch' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request POST 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "requests": [
@@ -188,10 +188,10 @@ var data = JSON.stringify({"requests":[{"method":"DELETE","path":"/storage/class
 
 var config = {
   method: 'post',
-  url: 'http://localhost:1337/storage/batch',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/batch',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   },
   data : data

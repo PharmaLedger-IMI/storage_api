@@ -1,11 +1,11 @@
-## Deleting Objects
+## Deleting Object
 
 > Deleting an object request example
 
 ```shell
-curl --location --request DELETE 'http://localhost:1337/storage/classes/Product/Ed1nuqPvcm' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request DELETE 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/Ed1nuqPvcm' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json'
 ```
 
@@ -14,10 +14,10 @@ var axios = require('axios');
 
 var config = {
  method: 'delete',
- url: 'http://localhost:1337/storage/classes/Product/Ed1nuqPvcm',
+ url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/Ed1nuqPvcm',
  headers: {
-   'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-   'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+   'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+   'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
    'Content-Type': 'application/json'
  }
 };
@@ -37,7 +37,7 @@ This endpoint deletes object.
 
 ### HTTP Request
 
-`DELETE http://<API_HOST>/storage/classes/<className>/<objectId>`
+`DELETE http://<API_HOST>/v1/storage/classes/<className>/<objectId>`
 
 ### URL Parameters
 
@@ -47,13 +47,7 @@ className |      | Class name of the object. We recommend that you `NameYourClas
 objectId |      | Object Id of the object.
 
 ### Response
-When the update is successful, the HTTP response is a `200 Ok` and the `Location` header contains the object URL for the object:
-
-<code>
-https://&lt;API_HOST&gt;/storage/classes/Product/Ed1nuqPvcm
-</code>
-
-The response body is a JSON object containing just an `{}` empty dictionary.
+When the update is successful, the HTTP response is a `200 Ok`. The response body is a JSON object containing just an `{}` empty dictionary.
 
 <code>
 {}

@@ -1,11 +1,11 @@
-## Retrieving Objects
+## Retrieving Object
 
 > Retrieving an object request example
 
 ```shell
-curl --location --request GET 'http://localhost:1337/storage/classes/Product/Ed1nuqPvcm' \
---header 'X-Storage-Application-Id: 4d98fbf2-f85f-4153-9e1c-91ee5776b0d7' \
---header 'X-Storage-REST-API-Key: 4c8dc298-de81-48c2-8fdc-3897e1ac2a17' \
+curl --location --request GET 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/Ed1nuqPvcm' \
+--header 'X-Storage-Application-Id: 4216d048-ed22-4d70-8b95-6ee91a35fc2a' \
+--header 'X-Storage-REST-API-Key: 8e2f92c9-f743-472f-ad63-00243741e045' \
 --header 'Content-Type: application/json'
 ```
 
@@ -14,10 +14,10 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'http://localhost:1337/storage/classes/Product/Ed1nuqPvcm',
+  url: 'http://a02d165c043b944569194c64a27be04e-1762256349.eu-central-1.elb.amazonaws.com/v1/storage/classes/Product/Ed1nuqPvcm',
   headers: {
-    'X-Storage-Application-Id': '4d98fbf2-f85f-4153-9e1c-91ee5776b0d7',
-    'X-Storage-REST-API-Key': '4c8dc298-de81-48c2-8fdc-3897e1ac2a17',
+    'X-Storage-Application-Id': '4216d048-ed22-4d70-8b95-6ee91a35fc2a',
+    'X-Storage-REST-API-Key': '8e2f92c9-f743-472f-ad63-00243741e045',
     'Content-Type': 'application/json'
   }
 };
@@ -31,13 +31,11 @@ axios(config)
 });
 ```
 
-Once you've created an object, you can retrieve its contents by sending a GET request to the object URL returned in the location header. For example, to retrieve the object we created above:
-
 This endpoint retrieves object.
 
 ### HTTP Request
 
-`GET http://<API_HOST>/storage/classes/<className>/<objectId>`
+`GET http://<API_HOST>/v1/storage/classes/<className>/<objectId>`
 
 ### URL Parameters
 
@@ -50,7 +48,7 @@ objectId |      | Object ID of the object.
 When the retrieve is successful, the HTTP response is a `200 Ok` and the `Location` header contains the object URL for the retrieve object:
 
 <code>
-https://&lt;API_HOST&gt;/storage/classes/Product/Ed1nuqPvcm
+https://&lt;API_HOST&gt;/storage/classes/&lt;className&gt;/&lt;objectId&gt;
 </code>
 
 The response body is a JSON object containing all the user-provided fields, plus the `createdAt`, `updatedAt`, and `objectId` fields:
