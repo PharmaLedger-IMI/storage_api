@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: storage-api-doc
+  name: storage-api-doc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: storage-api-doc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: storage-api-doc
+    spec:
+      containers:
+      - image: raihan2006i/storage_api_doc:1.0
+        imagePullPolicy: ""
+        name: storage-api-doc
+        ports:
+        - containerPort: 6379
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
