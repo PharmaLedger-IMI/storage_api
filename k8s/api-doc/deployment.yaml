@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - image: raihan2006i/storage_api_doc:1.0
-        imagePullPolicy: ""
+        imagePullPolicy: "Always"
         name: storage-api-doc
         ports:
         - containerPort: 6379

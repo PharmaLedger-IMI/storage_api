@@ -53,28 +53,28 @@ API access can be provided over HTTPS and HTTP. We recommend utilizing HTTPS for
 
 | URL                                 | HTTP Verb | Functionality                                      |
 |-------------------------------------|-----------|----------------------------------------------------|
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>classes/&lt;className&gt;</code>            | POST      | [Creating Object](#creating-object)      |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | GET       | [Retrieving Object](#retrieving-object)  |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | PUT       | [Updating Object](#updating-object)      |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>classes/&lt;className&gt;</code>            | GET       | [Querying Objects](#querying-objects)                                |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | DELETE    | [Deleting Object](#deleting-object)      |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>classes/&lt;className&gt;</code>            | POST      | [Creating Object](#creating-object)      |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | GET       | [Retrieving Object](#retrieving-object)  |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | PUT       | [Updating Object](#updating-object)      |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>classes/&lt;className&gt;</code>            | GET       | [Querying Objects](#querying-objects)                                |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>classes/&lt;className&gt;/&lt;objectId&gt;</code> | DELETE    | [Deleting Object](#deleting-object)      |
 
 **Schema Definition APIs**
 
 | URL                     | HTTP Verb | Functionality                                             |
 |-------------------------|-----------|-----------------------------------------------------------|
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>schemas/</code>           | GET       | [Retrieving all Schemas](#retrieving-all-schemas)             |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>schemas/&lt;className&gt;</code>| GET       | [Retrieving Schema](#retrieving-schema)                  |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>schemas/&lt;className&gt;</code>| POST      | [Creating Schema](#creating-schema)                  |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>schemas/&lt;className&gt;</code>| PUT       | [Updating Schema](#updating-schema)             |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>schemas/&lt;className&gt;</code>| DELETE    | [Deleting Schema](#deleting-schema)                |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>schemas/</code>           | GET       | [Retrieving all Schemas](#retrieving-all-schemas)             |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>schemas/&lt;className&gt;</code>| GET       | [Retrieving Schema](#retrieving-schema)                  |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>schemas/&lt;className&gt;</code>| POST      | [Creating Schema](#creating-schema)                  |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>schemas/&lt;className&gt;</code>| PUT       | [Updating Schema](#updating-schema)             |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>schemas/&lt;className&gt;</code>| DELETE    | [Deleting Schema](#deleting-schema)                |
 
 **File Store APIs**
 
 | URL                   | HTTP Verb | Functionality                             |
 |-----------------------|-----------|-------------------------------------------|
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>files/&lt;fileName&gt;</code> | POST      | [Uploading File](#uploading-file) |
-| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/storage/</span>files/&lt;fileName&gt;</code> | DELETE      | [Deleting File](#deleting-file) |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>files/&lt;fileName&gt;</code> | POST      | [Uploading File](#uploading-file) |
+| <code class="highlighter-rouge"><span class="custom-parse-server-mount">/v1/storage/</span>files/&lt;fileName&gt;</code> | DELETE      | [Deleting File](#deleting-file) |
 
 # Request Format
 

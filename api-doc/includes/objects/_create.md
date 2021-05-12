@@ -53,7 +53,7 @@ className |      | Class name of the object. We recommend that you `NameYourClas
 When the creation is successful, the HTTP response is a `201 Created` and the `Location` header contains the object URL for the new object:
 
 <code>
-https://&lt;API_HOST&gt;/storage/classes/&lt;className&gt;
+https://&lt;API_HOST&gt;/v1/storage/classes/&lt;className&gt;
 </code>
 
 The response body is a JSON object containing the `objectId` and the `createdAt` timestamp of the newly-created object:

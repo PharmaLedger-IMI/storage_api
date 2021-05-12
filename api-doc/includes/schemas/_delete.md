@@ -40,7 +40,7 @@ This endpoint deletes a Schema.
 
 ### HTTP Request
 
-`DELETE http://localhost:3000/storage/schemas/<className>`
+`DELETE http://<API_HOST>/v1/storage/schemas/<className>`
 
 ### URL Parameters
 

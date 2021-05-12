@@ -32,11 +32,11 @@ When you retrieve objects, some fields are automatically added: `createdAt`, `up
 In the REST API, the class-level operations operate on a resource based on just the class name. For example, if the class name is `Product`, the class URL is:
 
 <code>
-https://&lt;API_HOST&gt;/storage/classes/Product
+https://&lt;API_HOST&gt;/v1/storage/classes/Product
 </code>
 
 The operations specific to a single object are available as a nested URL. For example, operations specific to the `Product` above with `objectId` equal to `Ed1nuqPvcm` would use the object URL:
 
 <code>
-https://&lt;API_HOST&gt;/storage/classes/Product/Ed1nuqPvcm
+https://&lt;API_HOST&gt;/v1/storage/classes/Product/Ed1nuqPvcm
 </code>

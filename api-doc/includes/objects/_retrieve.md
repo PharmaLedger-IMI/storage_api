@@ -48,7 +48,7 @@ objectId |      | Object ID of the object.
 When the retrieve is successful, the HTTP response is a `200 Ok` and the `Location` header contains the object URL for the retrieve object:
 
 <code>
-https://&lt;API_HOST&gt;/storage/classes/&lt;className&gt;/&lt;objectId&gt;
+https://&lt;API_HOST&gt;/v1/storage/classes/&lt;className&gt;/&lt;objectId&gt;
 </code>
 
 The response body is a JSON object containing all the user-provided fields, plus the `createdAt`, `updatedAt`, and `objectId` fields:
