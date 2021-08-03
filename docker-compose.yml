@@ -45,10 +45,10 @@ services:
       - api
   api-doc:
     image: slatedocs/slate:latest
-    command: serve
+    command: build
     container_name: storage-api-doc
     volumes:
-      - $PWD/api-doc/images/logo.png:/srv/slate/source/images/logo.png
+      - $PWD/api-doc/images/storage.png:/srv/slate/source/images/logo.png
       - $PWD/api-doc/index.html.md:/srv/slate/source/index.html.md
       - $PWD/api-doc/includes:/srv/slate/source/includes
       - $PWD/api-doc/build:/srv/slate/build
