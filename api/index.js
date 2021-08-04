@@ -39,13 +39,13 @@ let express = require('express')
     , morgan = require('morgan');
 
 function addDataExpirationWorker(responseBody, req) {
-  if((req.method === 'POST' || req.method === 'PUT') && req.path.includes("/classes/") && responseBody.objectId && req.body.expiresAt) {
-    const regex = /classes\/(?<className>\w+)/g;
-    const { groups: { className } } = regex.exec(req.path);
+  if((req.method === 'POST' || req.method === 'PUT') && req.path.includes("/classes/") && req.body.expiresAt) {
+    const regex = /classes\/(?<className>\w+)\/(?<objectId>\w+)/g;
+    const { groups: { className, objectId } } = regex.exec(req.path);
     const now = moment.utc();
     const expiresAt = moment(req.body.expiresAt.iso).utc();
     const diffInMilliseconds = expiresAt.diff(now)
-    const jobData = {className: className, objectId: responseBody.objectId, expiresAt: expiresAt.toISOString()};
+    const jobData = {className: className, objectId: objectId, expiresAt: expiresAt.toISOString()};
     const jobOptions = {
       delay: diffInMilliseconds,
       attempts: 3
