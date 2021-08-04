@@ -34,15 +34,6 @@ services:
       - redis
     env_file:
       - $PWD/api/.env
-  dashboard:
-    image: yongjhih/parse-dashboard
-    container_name: storage-dashboard
-    env_file:
-      - $PWD/api/.dashboard.env
-    ports:
-      - 4040:4040
-    depends_on:
-      - api
   api-doc:
     image: slatedocs/slate:latest
     command: build

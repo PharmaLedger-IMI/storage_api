@@ -11,7 +11,6 @@ WORKDIR $APP_HOME
 
 # Copy code from working directory outside Docker to working directory inside Docker
 COPY . .
-# Sometime an extra yarn install is needed to install binaries / native extensions
 RUN yarn install
 
 # Set stop signal to SIGQUIT for graceful shutdown

@@ -1,5 +1,6 @@
 let express = require('express')
     , { default: ParseServer, ParseGraphQLServer, RedisCacheAdapter } = require('parse-server')
+    , ParseDashboard = require('parse-dashboard')
     , redisOptions = {url: process.env.REDIS_URI}
     , redisCache = new RedisCacheAdapter(redisOptions)
     , parseServerConfig = {
@@ -13,7 +14,58 @@ let express = require('express')
       cacheAdapter: redisCache
     }
     , parseServer = new ParseServer(parseServerConfig)
-    , app = express();
+    , parseDashboardConfig = {
+      allowInsecureHTTP: true,
+      apps: [
+        {
+          serverURL: process.env.SERVER_URL,
+          appId: process.env.APP_ID,
+          masterKey: process.env.MASTER_KEY,
+          appName: "StorageDb"
+        }
+      ],
+      users: [{
+        user: process.env.DASHBOARD_USER, pass: process.env.DASHBOARD_PASS
+      }]
+    }
+    , parseDashboard = new ParseDashboard(parseDashboardConfig, { allowInsecureHTTP: parseDashboardConfig.allowInsecureHTTP })
+    , app = express()
+    , mung = require('express-mung')
+    , moment = require('moment')
+    , dataExpirationWorker = require('./workers/data-expiration')
+    , addRequestId = require('express-request-id')({
+      setHeader: false
+    })
+    , morgan = require('morgan');
+
+function addDataExpirationWorker(responseBody, req) {
+  if((req.method === 'POST' || req.method === 'PUT') && req.path.includes("/classes/") && responseBody.objectId && req.body.expiresAt) {
+    const regex = /classes\/(?<className>\w+)/g;
+    const { groups: { className } } = regex.exec(req.path);
+    const now = moment.utc();
+    const expiresAt = moment(req.body.expiresAt.iso).utc();
+    const diffInMilliseconds = expiresAt.diff(now)
+    const jobData = {className: className, objectId: responseBody.objectId, expiresAt: expiresAt.toISOString()};
+    const jobOptions = {
+      delay: diffInMilliseconds,
+      attempts: 3
+    };
+    // Job Producer
+    dataExpirationWorker.add(jobData, jobOptions);
+    console.log('[' + moment.utc().toISOString() + '] Data expiration job is enqeued for', jobData)
+  }
+}
+
+// Start Rails style logging
+app.use(addRequestId);
+morgan.token('id', function(req) {
+  return req.id.split('-')[0];
+});
+app.use(morgan("[:date[iso] #:id] Started :method :url for :remote-addr", {
+  immediate: true
+}));
+app.use(morgan("[:date[iso] #:id] Completed :status :res[content-length] in :response-time ms"));
+// End Rails style logging
 
 app.all('/v1/storage/*', function (req, res, next) {
   if(req.headers['x-storage-application-id']) {
@@ -28,9 +80,31 @@ app.all('/v1/storage/*', function (req, res, next) {
   next();
 });
 
+app.use(express.json());
+
+app.use(mung.json(
+    function readResponse(responseBody, req, res) {
+      if(req.method === 'POST' && req.path.includes("/batch")) {
+        const requests = req.body.requests;
+        const responses = responseBody;
+
+        requests.forEach((req, index) => {
+          let responseBody = responses[index].success;
+          addDataExpirationWorker(responseBody, req);
+        });
+      } else {
+        addDataExpirationWorker(responseBody, req);
+      }
+      return responseBody;
+    }
+));
+
 app.use('/v1/storage', parseServer.app);
+
+// make the Parse Dashboard available at /dashboard
+app.use('/dashboard', parseDashboard);
 
 // Start the server
 app.listen(1337, function() {
-  // console.log('Server started!');
+  console.log('Server started!');
 });
