@@ -64,7 +64,22 @@ spec:
                 secretKeyRef:
                   name: storage-api-secrets
                   key: SERVER_URL
-          image: raihan2006i/storage_api:1.0
+            - name: JOB_REDIS_URI
+              valueFrom:
+                secretKeyRef:
+                  name: storage-api-secrets
+                  key: JOB_REDIS_URI
+            - name: DASHBOARD_USER
+              valueFrom:
+                secretKeyRef:
+                  name: storage-api-secrets
+                  key: DASHBOARD_USER
+            - name: DASHBOARD_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: storage-api-secrets
+                  key: DASHBOARD_PASS
+          image: raihan2006i/storage_api:1.1
           imagePullPolicy: "Always"
           name: storage-api
           ports:
