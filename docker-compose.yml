@@ -36,7 +36,7 @@ services:
       - $PWD/api/.env
   api-doc:
     image: slatedocs/slate:latest
-    command: build
+    command: serve
     container_name: storage-api-doc
     volumes:
       - $PWD/api-doc/images/storage.png:/srv/slate/source/images/logo.png

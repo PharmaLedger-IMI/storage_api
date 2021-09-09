@@ -317,11 +317,26 @@ axios(config)
 
 ### Pointer
 
-TODO
+<code>
+{<br>
+&nbsp;&nbsp;__type: "Pointer",<br>
+&nbsp;&nbsp;className: "Product",<br>
+&nbsp;&nbsp;objectId: productId<br>
+}
+</code>
 
 ### File
 
-TODO
+<code>
+{<br>
+&nbsp;&nbsp;"name": "Andrew",<br>
+&nbsp;&nbsp;"picture": {<br>
+&nbsp;&nbsp;&nbsp;"name": "...profile.png",<br>
+&nbsp;&nbsp;&nbsp;"url": "...profile.png",<br>
+&nbsp;&nbsp;&nbsp;"__type": "File"<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
 
 ### Relation
 

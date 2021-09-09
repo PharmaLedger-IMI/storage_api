@@ -26,3 +26,192 @@ include |      | Use on Pointer columns to return the full object
 ### Examples
 
 TODO
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
+
+<code>
+{<br>
+&nbsp;&nbsp;query getComments($productId: ID!) {<br>
+&nbsp;&nbsp;&nbsp;omments(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;edges {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createdAt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+</code>
