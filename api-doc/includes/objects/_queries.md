@@ -1,3 +1,7 @@
+---
+includes:
+  - parameters/where
+---
 ## Querying Objects
 
 This endpoint queries objects of a Class.
@@ -61,7 +65,7 @@ TODO
 &nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order: name<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
@@ -88,7 +92,7 @@ TODO
 &nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 200<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
@@ -115,7 +119,7 @@ TODO
 &nbsp;&nbsp;&nbsp;&nbsp;where: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idea: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;have: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objectId: { equalTo: $productId }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;skip: 400<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>

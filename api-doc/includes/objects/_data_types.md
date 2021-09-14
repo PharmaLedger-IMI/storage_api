@@ -329,10 +329,10 @@ axios(config)
 
 <code>
 {<br>
-&nbsp;&nbsp;"name": "Andrew",<br>
+&nbsp;&nbsp;"name": "Production",<br>
 &nbsp;&nbsp;"picture": {<br>
-&nbsp;&nbsp;&nbsp;"name": "...profile.png",<br>
-&nbsp;&nbsp;&nbsp;"url": "...profile.png",<br>
+&nbsp;&nbsp;&nbsp;"name": "...production.png",<br>
+&nbsp;&nbsp;&nbsp;"url": "...production.png",<br>
 &nbsp;&nbsp;&nbsp;"__type": "File"<br>
 &nbsp;&nbsp;}<br>
 }
