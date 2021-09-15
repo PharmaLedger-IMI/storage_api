@@ -17,7 +17,6 @@ includes:
   - objects/batch
   - objects/data_types
   - objects/queries
-  - objects/parameters/where
   - schemas/main
   - schemas/create
   - schemas/retrieve
