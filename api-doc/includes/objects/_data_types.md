@@ -327,14 +327,16 @@ axios(config)
 
 ### File
 
+To upload a file to Parse, send a POST request to the files URL, postfixed with the name of the file. The request must contain the `Content-Type` header associated with the file. Keep in mind that files are limited to 10 megabytes. Here’s a simple example that’ll create a file named `hello.txt` containing a string:
+
 <code>
 {<br>
-&nbsp;&nbsp;"name": "Production",<br>
-&nbsp;&nbsp;"picture": {<br>
-&nbsp;&nbsp;&nbsp;"name": "...production.png",<br>
-&nbsp;&nbsp;&nbsp;"url": "...production.png",<br>
-&nbsp;&nbsp;&nbsp;"__type": "File"<br>
-&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;curl -X POST \ <br>
+&nbsp;&nbsp;&nbsp;-H "X-Parse-Application-Id: ${APPLICATION_ID}" \ <br>
+&nbsp;&nbsp;&nbsp;-H "X-Parse-REST-API-Key: ${REST_API_KEY}" \ <br>
+&nbsp;&nbsp;&nbsp;-H "Content-Type: text/plain" \ <br>
+&nbsp;&nbsp;&nbsp;-d 'Hello, World!' \ <br>
+&nbsp;&nbsp;&nbsp;https://YOUR.PARSE-SERVER.HERE/parse/files/hello.txt <br>
 }
 </code>
 
