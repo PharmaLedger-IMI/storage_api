@@ -1,0 +1,15 @@
+version: "2"
+services:
+  api:
+    build: ./api
+    command: yarn start
+    container_name: storage-api
+    volumes:
+      - $PWD/api:/app/
+      - /app/node_modules
+    ports:
+      - 1337:1337
+    env_file:
+      - $PWD/api/.env
+    environment:
+      - DATABASE_URI=${DATABASE_URI}
