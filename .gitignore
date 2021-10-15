@@ -10,7 +10,7 @@ data
 node_modules
 logs
 /dist
-
+api/files
 
 # local env files
 .env.local

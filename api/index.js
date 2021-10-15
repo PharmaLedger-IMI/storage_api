@@ -13,7 +13,41 @@ let express = require('express')
       cloud: "./cloud/main.js",
       cacheAdapter: redisCache
     }
-    , parseServer = new ParseServer(parseServerConfig)
+    , FSFilesAdapter = require('@parse/fs-files-adapter')
+    , FSS3Adapter = require('parse-server').S3Adapter
+    , FSGCSAdapter = require('parse-server-gcs-adapter');
+
+if(process.env.FILES_SUB_DIRECTORY) {
+  parseServerConfig.filesAdapter = new FSFilesAdapter({
+    "filesSubDirectory": process.env.FILES_SUB_DIRECTORY
+  });
+  console.log('******************** FSFilesAdapter ********************');
+} else if(process.env.S3_ACCESS_KEY && process.env.S3_SECRET_KEY && process.env.S3_BUCKET) {
+  console.log('******************** S3Adapter ********************');
+  parseServerConfig.filesAdapter = new FSS3Adapter(
+    process.env.S3_ACCESS_KEY,
+    process.env.S3_SECRET_KEY,
+    process.env.S3_BUCKET,
+    {
+      region: process.env.S3_REGION || 'us-east-1',
+      bucketPrefix: process.env.S3_BUCKET_PREFIX || null,
+      directAccess: process.env.S3_DIRECT_ACCESS === 'true' ? true : false,
+    }
+  );
+} else if(process.env.GCP_PROJECT_ID && process.env.GCP_KEYFILE_PATH && process.env.GCS_BUCKET) {
+  console.log('******************** FSGCSAdapter ********************');
+  parseServerConfig.filesAdapter = new FSGCSAdapter(
+    process.env.GCP_PROJECT_ID,
+    process.env.GCP_KEYFILE_PATH,
+    process.env.GCS_BUCKET,
+    {
+      bucketPrefix: process.env.GCS_BUCKET_PREFIX || null,
+      directAccess: process.env.GCS_DIRECT_ACCESS === 'true' ? true : false,
+    }
+  );
+}
+
+let parseServer = new ParseServer(parseServerConfig)
     , parseDashboardConfig = {
       allowInsecureHTTP: true,
       apps: [
