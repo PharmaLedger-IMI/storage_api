@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: storage-redis
+  name: storage-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: storage-redis
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: storage-redis
+    spec:
+      containers:
+      - image: redis:alpine
+        imagePullPolicy: "Always"
+        name: storage-redis
+        ports:
+        - containerPort: 6379
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

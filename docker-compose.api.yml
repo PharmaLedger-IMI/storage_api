@@ -1,0 +1,30 @@
+version: "2"
+services:
+  api:
+    build: ./api
+    command: yarn start
+    container_name: storage-api
+    volumes:
+      - $PWD/api:/app/
+      - /app/node_modules
+      - files:/app/${FILES_SUB_DIRECTORY}
+    ports:
+      - 1337:1337
+    env_file:
+      - $PWD/api/.env
+    environment:
+      - DATABASE_URI=${DATABASE_URI}
+      - FILES_SUB_DIRECTORY=${FILES_SUB_DIRECTORY}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY}
+      - S3_SECRET_KEY=${S3_SECRET_KEY}
+      - S3_BUCKET=${S3_BUCKET}
+      - S3_REGION=${S3_REGION}
+      - S3_BUCKET_PREFIX=${S3_BUCKET_PREFIX}
+      - S3_DIRECT_ACCESS=${S3_DIRECT_ACCESS}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GCP_KEYFILE_PATH=${GCP_KEYFILE_PATH}
+      - GCS_BUCKET=${GCS_BUCKET}
+      - GCS_BUCKET_PREFIX=${GCS_BUCKET_PREFIX}
+      - GCS_DIRECT_ACCESS=${GCS_DIRECT_ACCESS}
+volumes:
+  files:
