@@ -6,15 +6,15 @@ metadata:
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
   labels:
-    io.kompose.service: storage-dashboard
-  name: storage-dashboard
+    io.kompose.service: storage-api
+  name: storage-api
 spec:
   type: LoadBalancer
   ports:
-    - name: "4040"
-      port: 4040
-      targetPort: 4040
+    - protocol: TCP
+      port: 80
+      targetPort: 1337
   selector:
-    io.kompose.service: storage-dashboard
+    io.kompose.service: storage-api
 status:
   loadBalancer: {}

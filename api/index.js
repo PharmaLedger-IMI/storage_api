@@ -1,5 +1,5 @@
 let express = require('express')
-    , { default: ParseServer, ParseGraphQLServer, RedisCacheAdapter } = require('parse-server')
+    , { default: ParseServer, RedisCacheAdapter } = require('parse-server')
     , ParseDashboard = require('parse-dashboard')
     , redisOptions = {url: process.env.REDIS_URI}
     , redisCache = new RedisCacheAdapter(redisOptions)

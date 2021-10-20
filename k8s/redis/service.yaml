@@ -7,8 +7,8 @@ metadata:
   name: storage-redis
 spec:
   ports:
-  - name: "7372"
-    port: 7372
+  - name: "6379"
+    port: 6379
     targetPort: 6379
   selector:
     io.kompose.service: storage-redis

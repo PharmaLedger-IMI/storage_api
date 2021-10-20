@@ -79,7 +79,12 @@ spec:
                 secretKeyRef:
                   name: storage-api-secrets
                   key: DASHBOARD_PASS
-          image: raihan2006i/storage_api:1.1
+            - name: FILES_SUB_DIRECTORY
+              valueFrom:
+                secretKeyRef:
+                  name: storage-api-secrets
+                  key: FILES_SUB_DIRECTORY
+          image: raihan2006i/storage_api:1.2
           imagePullPolicy: "Always"
           name: storage-api
           ports:

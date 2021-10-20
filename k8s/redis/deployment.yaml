@@ -18,8 +18,8 @@ spec:
         io.kompose.service: storage-redis
     spec:
       containers:
-      - image: redis
-        imagePullPolicy: ""
+      - image: redis:alpine
+        imagePullPolicy: "Always"
         name: storage-redis
         ports:
         - containerPort: 6379

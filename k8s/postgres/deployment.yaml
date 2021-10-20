@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: storage-postgres
+  name: storage-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: storage-postgres
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: storage-postgres
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: storage-postgres-secrets
+              key: POSTGRES_DB
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: storage-postgres-secrets
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: storage-postgres-secrets
+              key: POSTGRES_USER
+        image: postgis/postgis:9.6-2.5
+        imagePullPolicy: "Always"
+        name: storage-postgres
+        ports:
+        - containerPort: 5432
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
