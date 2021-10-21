@@ -366,17 +366,278 @@ After all of above steps you should be able to access the Storage API's followin
 ## Option 5
 Storage API with PostgresDB and Amazon S3 Storage
 
-TODO
+### Create a Namespace:
+
+Run following command to create a namespace.
+
+```shell
+kubectl create namespace option-five
+```
+
+If you are not using hosted services for PostgresDB and Redis, then deploy PostgresDB and Redis under namespace <tt>option-five</tt> by following guidelines.
+
+* [Deploy a PostgresDB](#deploy-a-postgresdb)
+* [Deploy a Redis](#deploy-a-redis)
+
+Get the endpoints of PostgresDB and Redis services by running following command.
+
+```shell
+kubectl get endpoints --namespace=option-five storage-postgres storage-redis
+```
+
+Which will return ENDPOINTS as like below:
+
+```shell
+NAME              ENDPOINTS            AGE
+storage-postgres  172.31.18.89:5432    22h
+storage-redis     172.31.29.241:6379   22h
+```
+
+We will need these endpoints in next step.
+
+### Deploying Storage API:
+
+Use the relavent <tt>[username]</tt>, <tt>[password]</tt>, <tt>[endpoint]</tt> amd <tt>[port]</tt> of PostgresDB service, to set the value of following environment variable in [secrets.yaml](api/option_5/secrets.yaml)
+
+* [DATABASE_URI](api/option_5/secrets.yaml#L4)
+
+Then use the relavent <tt>[endpoint]</tt> and <tt>[port]</tt> of Redis service, to set the value of following environment variable in [secrets.yaml](api/option_5/secrets.yaml)
+
+* [REDIS_URI](api/option_5/secrets.yaml#L7)
+* [JOB_REDIS_URI](api/option_5/secrets.yaml#L10)
+
+Then run following command to run a service for Storage API.
+
+```shell
+kubectl apply --namespace=option-five -f api/option_5/service.yaml
+```
+
+Then get the EXTERNAL-IP of storage-api service by running following command. 
+
+```shell
+kubectl get service --namespace=option-five storage-api
+```
+
+Which will return EXTERNAL-IP like below:
+
+```shell
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP                                                                  PORT(S)        AGE
+storage-api   LoadBalancer   10.100.85.98   af23704f0a38043b98a78d4525dbe733-1973784828.eu-central-1.elb.amazonaws.com   80:30918/TCP   20h
+```
+
+Use the EXTERNAL-IP as <tt>[enpoint]</tt> to set the value of following environment variable in [secrets.yaml](api/option_5/secrets.yaml)
+
+* [PUBLIC_SERVER_URL](api/option_5/secrets.yaml#L6)
+* [SERVER_URL](api/option_5/secrets.yaml#L9)
+
+Setup a S3 bucket in AWS (you can check this [guideline](https://docs.parseplatform.org/parse-server/guide/#set-up-your-bucket-and-permissions)) and then set following S3 environment variables in [secrets.yaml](api/option_5/secrets.yaml)
+
+* [S3_ACCESS_KEY](api/option_5/secrets.yaml#L13)
+* [S3_SECRET_KEY](api/option_5/secrets.yaml#L14)
+* [S3_BUCKET](api/option_5/secrets.yaml#L15)
+* [S3_REGION](api/option_5/secrets.yaml#L16)
+
+Also set the following environment variables in [secrets.yaml](api/option_5/secrets.yaml) according to your preference:
+
+* [APP_ID](api/option_5/secrets.yaml#L3)
+* [RESTAPI_KEY](api/option_5/secrets.yaml#L8)
+* [MASTER_KEY](api/option_5/secrets.yaml#L5)
+* [DASHBOARD_USER](api/option_5/secrets.yaml#L11)
+* [DASHBOARD_PASS](api/option_5/secrets.yaml#L12)
+
+Then run following commands:
+
+```shell
+kubectl apply --namespace=option-five -f api/option_5/secrets.yaml
+kubectl apply --namespace=option-five -f api/option_5/deployment.yaml
+```
+
+After all of above steps you should be able to access the Storage API's following endpoints:
+
+* RESTful API endpoint - http://<EXTERNAL-IP>/v1/storage
+* Dashboard - http://<EXTERNAL-IP>/dashboard
 
 ## Option 6
 Storage API with PostgresDB and Google Cloud Storage
 
-TODO
+### Create a Namespace:
+
+Run following command to create a namespace.
+
+```shell
+kubectl create namespace option-six
+```
+
+If you are not using hosted services for PostgresDB and Redis, then deploy PostgresDB and Redis under namespace <tt>option-six</tt> by following guidelines.
+
+* [Deploy a PostgresDB](#deploy-a-postgresdb)
+* [Deploy a Redis](#deploy-a-redis)
+
+Get the endpoints of PostgresDB and Redis services by running following command.
+
+```shell
+kubectl get endpoints --namespace=option-six storage-postgres storage-redis
+```
+
+Which will return ENDPOINTS as like below:
+
+```shell
+NAME              ENDPOINTS            AGE
+storage-postgres  172.31.18.89:5432    22h
+storage-redis     172.31.29.241:6379   22h
+```
+
+We will need these endpoints in next step.
+
+### Deploying Storage API:
+
+Use the relavent <tt>[username]</tt>, <tt>[password]</tt>, <tt>[endpoint]</tt> amd <tt>[port]</tt> of PostgresDB service, to set the value of following environment variable in [secrets.yaml](api/option_6/secrets.yaml)
+
+* [DATABASE_URI](api/option_6/secrets.yaml#L4)
+
+Then use the relavent <tt>[endpoint]</tt> and <tt>[port]</tt> of Redis service, to set the value of following environment variable in [secrets.yaml](api/option_6/secrets.yaml)
+
+* [REDIS_URI](api/option_6/secrets.yaml#L7)
+* [JOB_REDIS_URI](api/option_6/secrets.yaml#L10)
+
+Then run following command to run a service for Storage API.
+
+```shell
+kubectl apply --namespace=option-six -f api/option_6/service.yaml
+```
+
+Then get the EXTERNAL-IP of storage-api service by running following command. 
+
+```shell
+kubectl get service --namespace=option-six storage-api
+```
+
+Which will return EXTERNAL-IP like below:
+
+```shell
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP                                                                  PORT(S)        AGE
+storage-api   LoadBalancer   10.100.85.98   af23704f0a38043b98a78d4525dbe733-1973784828.eu-central-1.elb.amazonaws.com   80:30918/TCP   20h
+```
+
+Use the EXTERNAL-IP as <tt>[enpoint]</tt> to set the value of following environment variable in [secrets.yaml](api/option_6/secrets.yaml)
+
+* [PUBLIC_SERVER_URL](api/option_6/secrets.yaml#L6)
+* [SERVER_URL](api/option_6/secrets.yaml#L9)
+
+Setup a Google Cloud Storage bucket in Google Cloud and then set following GCS environment variables in [secrets.yaml](api/option_6/secrets.yaml)
+
+* [GCP_PROJECT_ID](api/option_6/secrets.yaml#L13)
+* [GCP_KEYFILE_PATH](api/option_6/secrets.yaml#L14)
+* [GCS_BUCKET](api/option_6/secrets.yaml#L15)
+
+Also set the following environment variables in [secrets.yaml](api/option_6/secrets.yaml) according to your preference:
+
+* [APP_ID](api/option_6/secrets.yaml#L3)
+* [RESTAPI_KEY](api/option_6/secrets.yaml#L8)
+* [MASTER_KEY](api/option_6/secrets.yaml#L5)
+* [DASHBOARD_USER](api/option_6/secrets.yaml#L11)
+* [DASHBOARD_PASS](api/option_6/secrets.yaml#L12)
+
+Then run following commands:
+
+```shell
+kubectl apply --namespace=option-six -f api/option_6/secrets.yaml
+kubectl apply --namespace=option-six -f api/option_6/deployment.yaml
+```
+
+After all of above steps you should be able to access the Storage API's following endpoints:
+
+* RESTful API endpoint - http://<EXTERNAL-IP>/v1/storage
+* Dashboard - http://<EXTERNAL-IP>/dashboard
 
 ## Option 7
 Storage API with PostgresDB and Local File Storage
 
-TODO
+This deployment does not use persistant volume. For production environment please use persistant volume.
+
+### Create a Namespace:
+
+Run following command to create a namespace.
+
+```shell
+kubectl create namespace option-seven
+```
+
+If you are not using hosted services for PostgresDB and Redis, then deploy PostgresDB and Redis under namespace <tt>option-seven</tt> by following guidelines.
+
+* [Deploy a PostgresDB](#deploy-a-postgresdb)
+* [Deploy a Redis](#deploy-a-redis)
+
+Get the endpoints of PostgresDB and Redis services by running following command.
+
+```shell
+kubectl get endpoints --namespace=option-seven storage-postgres storage-redis
+```
+
+Which will return ENDPOINTS as like below:
+
+```shell
+NAME              ENDPOINTS            AGE
+storage-postgres  172.31.18.89:5432   22h
+storage-redis     172.31.29.241:6379   22h
+```
+
+We will need these endpoints in next step.
+
+### Deploying Storage API:
+
+Use the relavent <tt>[username]</tt>, <tt>[password]</tt>, <tt>[endpoint]</tt> amd <tt>[port]</tt> of PostgresDB service, to set the value of following environment variable in [secrets.yaml](api/option_4/secrets.yaml)
+
+* [DATABASE_URI](api/option_7/secrets.yaml#L4)
+
+Then use the relavent <tt>[endpoint]</tt> and <tt>[port]</tt> of Redis service, to set the value of following environment variable in [secrets.yaml](api/option_7/secrets.yaml)
+
+* [REDIS_URI](api/option_4/secrets.yaml#L7)
+* [JOB_REDIS_URI](api/option_4/secrets.yaml#L10)
+
+Then run following command to run a service for Storage API.
+
+```shell
+kubectl apply --namespace=option-seven -f api/option_7/service.yaml
+```
+
+Then get the EXTERNAL-IP of storage-api service by running following command. 
+
+```shell
+kubectl get service --namespace=option-seven storage-api
+```
+
+Which will return EXTERNAL-IP like below:
+
+```shell
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP                                                                  PORT(S)        AGE
+storage-api   LoadBalancer   10.100.85.98   af23704f0a38043b98a78d4525dbe733-1973784828.eu-central-1.elb.amazonaws.com   80:30918/TCP   20h
+```
+
+Use the EXTERNAL-IP as <tt>[enpoint]</tt> to set the value of following environment variable in [secrets.yaml](api/option_7/secrets.yaml)
+
+* [PUBLIC_SERVER_URL](api/option_7/secrets.yaml#L6)
+* [SERVER_URL](api/option_7/secrets.yaml#L9)
+
+Also set the following environment variables in [secrets.yaml](api/option_7/secrets.yaml) according to your preference:
+
+* [APP_ID](api/option_7/secrets.yaml#L3)
+* [RESTAPI_KEY](api/option_7/secrets.yaml#L8)
+* [MASTER_KEY](api/option_7/secrets.yaml#L5)
+* [DASHBOARD_USER](api/option_7/secrets.yaml#L11)
+* [DASHBOARD_PASS](api/option_7/secrets.yaml#L12)
+
+Then run following commands:
+
+```shell
+kubectl apply --namespace=option-seven -f api/option_7/secrets.yaml
+kubectl apply --namespace=option-seven -f api/option_7/deployment.yaml
+```
+
+After all of above steps you should be able to access the Storage API's following endpoints:
+
+* RESTful API endpoint - http://<EXTERNAL-IP>/v1/storage
+* Dashboard - http://<EXTERNAL-IP>/dashboard
 
 ## Deploy a MongoDB
 

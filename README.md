@@ -70,14 +70,23 @@ DATABASE_URI="mongodb://developer:secret@mongodb:27017/storage-db?authSource=adm
 ```
 
 ## Option 2
-Storage API with MongoDB and Amazon S3 Storage
+Storage API with MongoDB and Amazon S3 Storage. Make sure to use correct value for following ENV variables:
+
+* <tt>S3_ACCESS_KEY</tt>
+* <tt>S3_SECRET_KEY</tt>
+* <tt>S3_BUCKET</tt>
+* <tt>S3_REGION</tt>
 
 ```shell
 DATABASE_URI="mongodb://developer:secret@mongodb:27017/storage-db?authSource=admin" S3_ACCESS_KEY="<S3_ACCESS_KEY>" S3_SECRET_KEY="<S3_SECRET_KEY>" S3_BUCKET="<S3_BUCKET>" S3_REGION="<S3_REGION>" docker-compose -p storage_api -f docker-compose.redis.yml -f docker-compose.mongodb.yml -f docker-compose.api.yml up --build
 ```
 
 ## Option 3
-Storage API with MongoDB and Google Cloud Storage
+Storage API with MongoDB and Google Cloud Storage. Make sure to use correct value for following ENV variables:
+
+* <tt>GCP_PROJECT_ID</tt>
+* <tt>GCP_KEYFILE_PATH</tt>
+* <tt>GCS_BUCKET</tt>
 
 ```shell
 DATABASE_URI="mongodb://developer:secret@mongodb:27017/storage-db?authSource=admin" GCP_PROJECT_ID="<GCP_PROJECT_ID>" GCP_KEYFILE_PATH="<GCP_KEYFILE_PATH>" GCS_BUCKET="<GCS_BUCKET>" docker-compose -p storage_api -f docker-compose.redis.yml -f docker-compose.mongodb.yml -f docker-compose.api.yml up --build
@@ -91,14 +100,23 @@ DATABASE_URI="mongodb://developer:secret@mongodb:27017/storage-db?authSource=adm
 ```
 
 ## Option 5
-Storage API with PostgresDB and Amazon S3 Storage
+Storage API with PostgresDB and Amazon S3 Storage. Make sure to use correct value for following ENV variables:
+
+* <tt>S3_ACCESS_KEY</tt>
+* <tt>S3_SECRET_KEY</tt>
+* <tt>S3_BUCKET</tt>
+* <tt>S3_REGION</tt>
 
 ```shell
 DATABASE_URI="postgres://developer:secret@postgres:5432/storage-db" S3_ACCESS_KEY="<S3_ACCESS_KEY>" S3_SECRET_KEY="<S3_SECRET_KEY>" S3_BUCKET="<S3_BUCKET>" S3_REGION="<S3_REGION>" docker-compose -p storage_api -f docker-compose.redis.yml -f docker-compose.postgres.yml -f docker-compose.api.yml up --build
 ```
 
 ## Option 6
-Storage API with PostgresDB and Google Cloud Storage
+Storage API with PostgresDB and Google Cloud Storage. Make sure to use correct value for following ENV variables:
+
+* <tt>GCP_PROJECT_ID</tt>
+* <tt>GCP_KEYFILE_PATH</tt>
+* <tt>GCS_BUCKET</tt>
 
 ```shell
 DATABASE_URI="postgres://developer:secret@postgres:5432/storage-db" GCP_PROJECT_ID="<GCP_PROJECT_ID>" GCP_KEYFILE_PATH="<GCP_KEYFILE_PATH>" GCS_BUCKET="<GCS_BUCKET>" docker-compose -p storage_api -f docker-compose.redis.yml -f docker-compose.postgres.yml -f docker-compose.api.yml up --build
